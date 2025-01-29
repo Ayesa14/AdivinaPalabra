@@ -18,25 +18,31 @@ class MyViewModel : ViewModel() {
     private val _estadoJuego = MutableStateFlow(EstadoJuego.JUGANDO)
     val estadoJuego: StateFlow<EstadoJuego> get() = _estadoJuego
 
-    // Variables de estado del juego
+    // Palabra que el jugador debe adivinar
     private val _palabra = MutableStateFlow("")
     val palabra: StateFlow<String> get() = _palabra
 
+    // Palabra ingresada por el jugador
     private val _palabraJugador = MutableStateFlow("")
     val palabraJugador: StateFlow<String> get() = _palabraJugador
 
+    // Pista actual para la palabra
     private val _pistaActual = MutableStateFlow("")
     val pistaActual: StateFlow<String> get() = _pistaActual
 
+    // Número de intentos realizados por el jugador
     private val _intento = MutableStateFlow(0)
     val intento: StateFlow<Int> get() = _intento
 
+    // Ronda actual del juego
     private val _ronda = MutableStateFlow(0)
     val ronda: StateFlow<Int> get() = _ronda
 
+    // Texto con el resultado del juego
     private val _textoResultado = MutableStateFlow("")
     val textoResultado: StateFlow<String> get() = _textoResultado
 
+    // Lista de pistas disponibles para la palabra actual
     private var pistasDisponibles = listOf<String>()
 
     /**

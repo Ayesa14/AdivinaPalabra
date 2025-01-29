@@ -1,10 +1,11 @@
-package com.example.adivinapalabras
+package com.example.adivinapalabra
 
 import kotlin.random.Random
 
 // Singleton que maneja el diccionario de palabras y pistas
 object Datos {
 
+    // Diccionario de palabras con sus pistas asociadas
     private val palabrasConPistas = mapOf(
         "Hola" to listOf("Saludo", "Hi", "Saludar"),
         "Adios" to listOf("Despedida", "Bye", "Chao"),
