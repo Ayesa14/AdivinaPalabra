@@ -1,12 +1,8 @@
 package com.example.AdivinaPalabra
 
-object Datos{
+class Datos private constructor(){
     val palabras = listOf("Hola", "Adios", "Ejemplo", "Perro", "Gato", "Alegre", "Triste", "Casa", "Profesor")
-    var ronda = 0
-    var intento = 0
     val intentosMax = 3
-    var pista = ""
-    val toastText = listOf("Has fallado", "Has acertado", "Has usado todas las pistas", "Has usado todos los intentos")
     val pistas = mapOf(
         "Hola" to listOf("Saludo", "Hi", "Saludar"),
         "Adios" to listOf("Despedida", "Bye", "Chao"),
@@ -18,4 +14,16 @@ object Datos{
         "Casa" to listOf("Vivienda", "Hogar", "Residencia"),
         "Profesor" to listOf("Maestro", "Docente", "Educador")
     )
+
+    // Companion object para manejar la única instancia
+    companion object {
+        @Volatile
+        private var instancia: Datos? = null  // Variable de instancia única
+
+        fun getInstance(): Datos {
+            return instancia ?: synchronized(this) { // Doble verificación para hilos
+                instancia ?: Datos().also { instancia = it }
+            }
+        }
+    }
 }
