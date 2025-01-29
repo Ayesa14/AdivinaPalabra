@@ -17,7 +17,7 @@ class Datos private constructor(){
 
     // Companion object para manejar la única instancia
     companion object {
-        @Volatile
+        @Volatile //evita problemas con hilos
         private var instancia: Datos? = null  // Variable de instancia única
 
         fun getInstance(): Datos {
