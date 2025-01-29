@@ -1,9 +1,11 @@
-package com.example.AdivinaPalabra
+package com.example.adivinapalabras
 
-class Datos private constructor(){
-    val palabras = listOf("Hola", "Adios", "Ejemplo", "Perro", "Gato", "Alegre", "Triste", "Casa", "Profesor")
-    val intentosMax = 3
-    val pistas = mapOf(
+import kotlin.random.Random
+
+// Singleton que maneja el diccionario de palabras y pistas
+object Datos {
+
+    private val palabrasConPistas = mapOf(
         "Hola" to listOf("Saludo", "Hi", "Saludar"),
         "Adios" to listOf("Despedida", "Bye", "Chao"),
         "Ejemplo" to listOf("Muestra", "Demostración", "Modelo"),
@@ -15,15 +17,26 @@ class Datos private constructor(){
         "Profesor" to listOf("Maestro", "Docente", "Educador")
     )
 
-    // Companion object para manejar la única instancia
-    companion object {
-        @Volatile //evita problemas con hilos
-        private var instancia: Datos? = null  // Variable de instancia única
+    const val INTENTOS_MAX = 3  // Máximo de intentos permitidos
 
-        fun getInstance(): Datos {
-            return instancia ?: synchronized(this) { // Doble verificación para hilos
-                instancia ?: Datos().also { instancia = it }
-            }
-        }
+    /**
+     * Obtiene una palabra aleatoria del diccionario.
+     * Si el diccionario está vacío, devuelve una cadena vacía.
+     * Si el diccionario no está vacío, devuelve una palabra aleatoria.
+     * @return Palabra aleatoria del diccionario.
+     */
+    fun obtenerPalabraAleatoria(): String {
+        return palabrasConPistas.keys.random()
+    }
+
+    /**
+     * Obtiene la lista de pistas asociadas a una palabra dada.
+     * Si la palabra no existe en el diccionario, devuelve una lista vacía.
+     * Si la palabra existe en el diccionario, devuelve la lista de pistas asociadas.
+     * @param palabra Palabra de la que se desean obtener las pistas.
+     * @return Lista de pistas asociadas a la palabra dada.
+     */
+    fun obtenerPistas(palabra: String): List<String> {
+        return palabrasConPistas[palabra] ?: emptyList()
     }
 }
